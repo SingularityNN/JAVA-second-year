@@ -3,10 +3,11 @@ package Clock;
 public class Clock_sec extends Clock implements Clock_Interface{
     private int Second_Hand;
 
+    public Clock_sec(){}
+    @Override
     public void Set_time(int H_h, int M_h, int S_h){
         if(H_h < 0 || M_h < 0 || S_h < 0){
-            System.out.println("Отрицательный параметр времени");
-            return;
+            throw new RuntimeException("Negative time parametr");
         }
         else {
             this.Hour_hand = (H_h % 12) + (M_h / 12);
@@ -19,6 +20,7 @@ public class Clock_sec extends Clock implements Clock_Interface{
         Set_name(name);
         Set_value(value);
     }
+    @Override
     public void Print_time(){
         System.out.println("H: " + this.Hour_hand + ", M: " + this.Minute_hand + ", S: " + this.Second_Hand);
     }

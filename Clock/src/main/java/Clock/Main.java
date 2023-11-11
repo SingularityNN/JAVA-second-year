@@ -2,14 +2,15 @@ package Clock;
 
 public class Main {
     public static void main(String[] args) {
-        Clock new_clock = new Clock(0, 0, "casio", 100);
-        new_clock.Set_time(12, 15);
-        new_clock.Move_time(3, 3);
-        new_clock.Print_info();
+        Shop shop = new Shop();
+        shop.Add(2, 3, 11, 41, "Xiaomi", 14500);
+        shop.Add(3, 5, 4, 11, "Xiaomi", 16000);
+        shop.Add(2, 12, 14, 30, "Rolex", 500000);
 
-        Clock_sec new_sec_clock = new Clock_sec(0, 0, 0, "aboba", 250);
-        new_sec_clock.Set_time(3, 2, -10);
-        new_sec_clock.Move_time(4, 10, 0);
-        new_sec_clock.Print_info();
+        shop.Print_Stock();
+        System.out.println("=====================================");
+
+        shop.Set_Global_Time(1, 2, 3);
+        shop.Print_Stock();
     }
 }
