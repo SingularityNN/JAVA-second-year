@@ -5,9 +5,9 @@ public class Clock_sec extends Clock implements Clock_Interface{
 
     public Clock_sec(){}
     @Override
-    public void Set_time(int H_h, int M_h, int S_h){
+    public void Set_time(int H_h, int M_h, int S_h) throws NTException{
         if(H_h < 0 || M_h < 0 || S_h < 0){
-            throw new RuntimeException("Negative time parametr");
+            throw new NTException();
         }
         else {
             this.Hour_hand = (H_h % 12) + (M_h / 12);
@@ -16,7 +16,12 @@ public class Clock_sec extends Clock implements Clock_Interface{
         }
     }
     public Clock_sec(int H_h, int M_h, int S_h, String name, int value){
-        Set_time(H_h, M_h, S_h);
+        try {
+            Set_time(H_h, M_h, S_h);
+        }
+        catch (NTException ex){
+            System.out.println(ex);
+        }
         Set_name(name);
         Set_value(value);
     }

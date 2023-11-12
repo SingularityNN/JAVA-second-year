@@ -51,7 +51,13 @@ public class Shop {
 
     public void Set_Global_Time(int H_h, int M_h, int S_h){
         for(int i = 0; i < N - 1; i++){
-            Stock[i].Set_time(H_h, M_h, S_h);
+            try {
+                Stock[i].Set_time(H_h, M_h, S_h);
+            }
+            catch (NTException ex){
+                System.out.println(ex);
+            }
+
         }
     }
 }

@@ -12,5 +12,8 @@ public class Main {
 
         shop.Set_Global_Time(1, 2, 3);
         shop.Print_Stock();
+        System.out.println("=====================================");
+
+        shop.Add(2, -12, 14, 30, "Rolex", 500000);
     }
 }
