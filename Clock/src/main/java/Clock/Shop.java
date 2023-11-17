@@ -1,52 +1,32 @@
 package Clock;
+import java.util.*;
 
-public class Shop {
-    private Clock_Interface[] Stock;
+public class Shop implements Iterable<Clock_Interface>{
+    private List<Clock_Interface> Stock = new ArrayList<>();
     private Clock_Factory F;
     private int N;
 
-    public Shop(){
-        N = 1;
-        Stock = new Clock_Interface[N];
-        F = new Clock_2h_Factory();
+    @Override
+    public Iterator<Clock_Interface> iterator(){
+        return Stock.iterator();
     }
-    public void Add(int num_of_hands, int H_h, int M_h, int S_h, String name, int value){
-        if(num_of_hands == 2){
-            F = new Clock_2h_Factory();
-        }
-        else if(num_of_hands == 3){
-            F = new Clock_3h_Factory();
-        }
-        else{
-            throw new RuntimeException("Incorrect number of hands");
-        }
 
 
-        Clock_Interface[] tmp = new Clock_Interface[N + 1];
-        System.arraycopy(Stock, 0, tmp, 0, N);
-
-        tmp[N - 1] = F.Create_Clock(H_h, M_h, S_h, name, value);
-        Stock = tmp;
-
-        N++;
-    }
 
     public void Print_Stock(){
-        for(int i = 0; i < N - 1; i++){
-            Stock[i].Print_info();
-        }
+
     }
 
     public void Print_Most_Valuable(){
         int max = 0;
         int ind = 0;
         for(int i = 0; i < N - 1; i++){
-            if(Stock[i].Get_value() > max){
-                max = Stock[i].Get_value();
+            if(Stock[i].Get_price() > max){
+                max = Stock[i].Get_price();
                 ind = i;
             }
         }
-        Stock[ind].Print_info();
+        Stock[ind].toS;
     }
 
     public void Set_Global_Time(int H_h, int M_h, int S_h){

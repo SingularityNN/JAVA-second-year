@@ -1,63 +1,77 @@
 package Clock;
 
-public class Clock implements Clock_Interface {
+public class Clock implements Clock_Interface{
     protected int Hour_hand;
     protected int Minute_hand;
     protected String name;
-    protected int value;
+    protected int price;
     public Clock(){
     }
-    public Clock(int H_h, int M_h, String name, int value){
-        try {
-            Set_time(H_h, M_h, 0);
-        }
-        catch (NTException ex){
-            System.out.println(ex);
-        }
+    public Clock(int H_h, int M_h, String name, int price){
+        Hour_hand = H_h;
+        Minute_hand = M_h;
         Set_name(name);
-        Set_value(value);
+        Set_price(price);
     }
-    @Override
-    public void Set_time(int H_h, int M_h, int S_h) throws NTException{
-        if(H_h < 0 || M_h < 0){
+    public void Set_time(Enum p, int value) throws NTException{
+        if(value < 0)
             throw new NTException();
-        }
-        else {
-            this.Hour_hand = (H_h % 12) + (M_h / 12);
-            this.Minute_hand = (M_h % 12);
+
+        switch (p){
+            case HOURS:
+                this.Hour_hand = (value % 12);
+                break;
+
+            case MINUTES:
+                this.Minute_hand = (value % 60);
+                break;
+
+            case SECONDS:
+                break;
         }
     }
-    @Override
+
     public void Set_name(String name){
         this.name = name;
     }
-    @Override
-    public void Set_value(int value){
-        this.value = value;
-    }
-    @Override
-    public void Move_time(int hours_plus, int minutes_plus){
-        this.Minute_hand += minutes_plus;
-        this.Hour_hand += hours_plus + (Minute_hand / 12);
 
-        this.Hour_hand = this.Hour_hand % 12;
-        this.Minute_hand = this.Minute_hand % 12;
+    public void Set_price(int price){
+        this.price = price;
     }
-    @Override
+
     public String Get_name(){
         return this.name;
     }
-    @Override
-    public int Get_value(){
-        return this.value;
+    public int Get_price(){
+        return this.price;
     }
-    @Override
-    public void Print_time(){
-        System.out.println("H: " + this.Hour_hand + ", M: " + this.Minute_hand);
+
+    public String toString(){
+        return "Марка: " + Get_name() + ", стоимость: " + Get_price() + "\n" + "H: " + this.Hour_hand + ", M: " + this.Minute_hand;
     }
-    @Override
-    public void Print_info(){
-        System.out.println("Марка: " + Get_name() + ", стоимость: " + Get_value());
-        Print_time();
+
+
+    public void Move_time(Enum p, int value) throws NTException{
+        if(value < 0)
+            throw new NTException();
+
+        switch (p){
+            case HOURS:
+                this.Hour_hand += value;
+                this.Hour_hand %= 12;
+                break;
+
+            case MINUTES:
+                this.Minute_hand += value;
+                this.Hour_hand += Minute_hand / 60;
+                this.Minute_hand %= 60;
+                break;
+
+            case SECONDS:
+                break;
+        }
     }
+
+
+
 }
