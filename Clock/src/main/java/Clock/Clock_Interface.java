@@ -1,12 +1,12 @@
 package Clock;
 
 public interface Clock_Interface {
-    void Set_time(Enum p, int value) throws NTException;
-    void Move_time(Enum p, int value) throws NTException;
-    void Set_name(String _name);
-    void Set_price(int price);
-    int Get_price();
-    String Get_name();
+    void setTime(Enum p, int value) throws NTException;
+    void moveTime(Enum p, int value) throws NTException;
+    void setName(String _name);
+    void setPrice(int price);
+    int getPrice();
+    String getName();
     String toString();
 
 

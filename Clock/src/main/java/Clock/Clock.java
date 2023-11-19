@@ -7,13 +7,15 @@ public class Clock implements Clock_Interface{
     protected int price;
     public Clock(){
     }
-    public Clock(int H_h, int M_h, String name, int price){
+    public Clock(int H_h, int M_h, String name, int price)throws NTException{
+        if(H_h < 0 || M_h < 0)
+            throw new NTException();
         Hour_hand = H_h;
         Minute_hand = M_h;
-        Set_name(name);
-        Set_price(price);
+        setName(name);
+        setPrice(price);
     }
-    public void Set_time(Enum p, int value) throws NTException{
+    public void setTime(Enum p, int value) throws NTException{
         if(value < 0)
             throw new NTException();
 
@@ -31,27 +33,27 @@ public class Clock implements Clock_Interface{
         }
     }
 
-    public void Set_name(String name){
+    public void setName(String name){
         this.name = name;
     }
 
-    public void Set_price(int price){
+    public void setPrice(int price){
         this.price = price;
     }
 
-    public String Get_name(){
+    public String getName(){
         return this.name;
     }
-    public int Get_price(){
+    public int getPrice(){
         return this.price;
     }
 
     public String toString(){
-        return "Марка: " + Get_name() + ", стоимость: " + Get_price() + "\n" + "H: " + this.Hour_hand + ", M: " + this.Minute_hand;
+        return "Марка: " + getName() + ", стоимость: " + getPrice() + "\n" + "H: " + this.Hour_hand + ", M: " + this.Minute_hand;
     }
 
 
-    public void Move_time(Enum p, int value) throws NTException{
+    public void moveTime(Enum p, int value) throws NTException{
         if(value < 0)
             throw new NTException();
 
