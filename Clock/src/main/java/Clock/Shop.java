@@ -1,51 +1,53 @@
 package Clock;
 import java.util.*;
 
-public class Shop implements Iterable<Clock_Interface>{
+public class Shop implements Iterable<Clock_Interface> {
     private final List<Clock_Interface> Stock;
-    private final Clock_Factory F;
 
     @Override
     public Iterator<Clock_Interface> iterator(){
         return Stock.iterator();
     }
 
+
+
     public Shop(){
         Stock = new ArrayList<>();
-        F = new Clock_Factory();
     }
 
-
-    public void addClock(int H_h, int M_h, String name, int price)throws NTException{
-        Stock.add(F.create(H_h, M_h, name, price));
+    public void addClock(Clock_Interface cl)throws NTException{
+        Stock.add(cl);
     }
-    public void addClockSec(int H_h, int M_h, int S_h, String name, int price)throws NTException{
-        Stock.add(F.create(H_h, M_h, S_h, name, price));
-    }
-
 
     public void printStock(){
         Iterator<Clock_Interface> itr = iterator();
         while(itr.hasNext()){
-            System.out.println(itr.next().toString());
+            System.out.println(itr.next());
         }
-
     }
 
-    public void printMostValuable(){
-        int max = 0;
+    public Clock_Interface getMostValuable(){
         Clock_Interface res = null;
 
+        ArrayList<Integer> values = new ArrayList<>();
         Iterator<Clock_Interface> itr = iterator();
-        while(itr.hasNext()){
-            Clock_Interface next = itr.next();
-            if(next.getPrice() > max){
-                max = next.getPrice();
+
+        while (itr.hasNext()){
+            int next = itr.next().getPrice();
+            values.add(next);
+        }
+
+        Collections.sort(values);
+        Iterator<Clock_Interface> itr2 = iterator();
+
+        while (itr2.hasNext()){
+            Clock_Interface next = itr2.next();
+            if(next.getPrice() == values.get(values.size()-1)){
                 res = next;
+                break;
             }
         }
-        assert res != null;
-        System.out.println(res.toString());
+        return res;
     }
 
     public void setGlobalTime(int H_h, int M_h, int S_h) throws NTException {
@@ -101,4 +103,21 @@ public class Shop implements Iterable<Clock_Interface>{
         }
         return res;
     }
+
+
+
 }
+
+    /*int max = 0;
+    Clock_Interface res = null;
+
+    Iterator<Clock_Interface> itr = iterator();
+        while(itr.hasNext()){
+                Clock_Interface next = itr.next();
+                if(next.getPrice() > max){
+                max = next.getPrice();
+                res = next;
+                }
+                }
+                assert res != null;
+                return res;*/
